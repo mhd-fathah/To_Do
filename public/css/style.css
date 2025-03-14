@@ -114,3 +114,8 @@ body {
     height: 20px;
     cursor: pointer;
 }
+
+.completed .task-text {
+    text-decoration: line-through;
+    color: gray;
+}

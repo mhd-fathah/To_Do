@@ -1,7 +1,7 @@
 import { Router } from "express";
 import TaskController from "../controllers/taskController.js";
 const router = Router();
-router.get("/", TaskController.getAllTasks);
+router.get("/", TaskController.getAllTask);
 router.get("/tasks", TaskController.getTasksJson);
 router.post("/tasks", TaskController.createTask);
 router.put("/tasks/:id", TaskController.updateTask);

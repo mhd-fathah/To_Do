@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import TaskService from "../services/TaskService.js";
 class TaskController {
-    static getAllTasks(req, res) {
+    static getAllTask(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const tasks = yield TaskService.getAllTasks();

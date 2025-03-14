@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import TaskService from "../services/TaskService.js";
 
 class TaskController {
-    static async getAllTasks(req: Request, res: Response) {
+    static async getAllTask(req: Request, res: Response) {
         try {
             const tasks = await TaskService.getAllTasks();
             res.render("index", { tasks });
