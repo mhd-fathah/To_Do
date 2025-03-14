@@ -13,7 +13,7 @@ body {
 
 .app-title {
     font-weight: 600;
-    color: #3a0ca3;
+    color: #5B2333;
 }
 
 .task-container {
@@ -86,13 +86,13 @@ body {
 }
 
 .btn-primary {
-    background-color: #3a0ca3;
-    border-color: #3a0ca3;
+    background-color: #5B2333;
+    border-color: #F7F4F3;
 }
 
 .btn-primary:hover {
-    background-color: #2d0a7d;
-    border-color: #2d0a7d;
+    background-color: #471926;
+    border-color: #F7F4F3;
 }
 
 .btn-outline-secondary {
