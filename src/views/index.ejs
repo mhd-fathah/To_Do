@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleTasks | Professional Task Manager</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container py-5">
+        <div class="app-header text-center">
+            <h1 class="app-title"><i class="fas fa-check-circle me-2"></i>SimpleTasks</h1>
+            <p class="text-muted">A clean, simple way to organize your day</p>
+        </div>
+        
+        <div class="task-container">
+            <!-- Add Task Form -->
+            <form class="add-task-form" id="add-task-form">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="new-task" placeholder="Add a new task..." required>
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-plus me-1"></i> Add
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Task List Controls -->
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="counter">
+                    <span id="tasks-counter">3</span> tasks remaining
+                </div>
+                <div>
+                    <button class="btn btn-sm btn-outline-secondary" id="clear-completed">
+                        Clear completed
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Task List -->
+            <div id="task-list">
+                <% tasks.forEach(task => { %>
+                    <div class="task-item d-flex align-items-center <%= task.completed ? 'completed' : '' %>">
+                        <div class="checkbox-wrapper-4">
+                            <input class="form-check-input" type="checkbox" 
+                                   <%= task.completed ? "checked" : "" %> 
+                                   data-id="<%= task.id %>">
+                        </div>
+                        <div class="task-text"><%= task.title %></div>
+                        <div class="task-actions">
+                            <button class="action-btn delete-btn" data-id="<%= task.id %>">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.getElementById("add-task-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const taskTitle = document.getElementById("new-task").value.trim();
+            if (!taskTitle) return;
+    
+            await fetch("/tasks", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title: taskTitle })
+            });
+    
+            window.location.reload();
+        });
+    
+        document.querySelectorAll(".delete-btn").forEach(btn => {
+            btn.addEventListener("click", async (e) => {
+                const taskId = e.target.closest("button").dataset.id;
+                await fetch(`/tasks/${taskId}`, { method: "DELETE" });
+                window.location.reload();
+            });
+        });
+    </script>
+   
+</body>
+</html>
