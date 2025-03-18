@@ -69,6 +69,11 @@
 
 
     <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector(".form-control").focus();
+        });
+
         document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll(".form-check-input").forEach(checkbox => {
                 checkbox.addEventListener("change", function () {
